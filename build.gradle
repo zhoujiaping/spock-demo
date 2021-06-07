@@ -1,0 +1,51 @@
+plugins {
+    id 'org.springframework.boot' version '2.5.0'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'groovy'
+    id "io.franzbecker.gradle-lombok" version "3.1.0"   //在此添加插件否则lombok引用会失败
+}
+apply plugin: 'maven'
+group 'org.example'
+version '1.0-SNAPSHOT'
+//apply plugin: 'java'
+apply plugin: "io.franzbecker.gradle-lombok"  //再次应用插件 只需这两行即可实现lombok的功能
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+[compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+task "create-dirs" doLast {
+    sourceSets*.java.srcDirs*.each {
+        it.mkdirs()
+    }
+    sourceSets*.groovy.srcDirs*.each {
+        it.mkdirs()
+    }
+    sourceSets*.resources.srcDirs*.each {
+        it.mkdirs()
+    }
+}
+
+repositories {
+    //mavenCentral()
+    //jcenter()
+    //maven{url 'C:/Users/你的用户名/.m2/repository'}
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
+}
+
+ext{
+}
+dependencies {
+    implementation 'org.projectlombok:lombok:1.18.8'
+    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.codehaus.groovy:groovy'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+
+test {
+    useJUnitPlatform()
+}
+
