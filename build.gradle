@@ -42,6 +42,9 @@ dependencies {
     implementation 'org.codehaus.groovy:groovy'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation group: 'org.spockframework', name: 'spock-spring', version: '2.0-groovy-3.0'
+    testImplementation group: 'org.spockframework', name: 'spock-core', version: '2.0-groovy-3.0'
+
 }
 
 
