@@ -69,7 +69,7 @@ class CustomerServiceSpec extends Specification{
         def customerRepository = Stub(CustomerRepositoryImpl){
             listCustomers(_)>>{
                 String searchKey0->
-                    log.info("invoke stub...")
+                    log.info("invoke stub...{}",otherVar)
                     callRealMethod()
             }
         }
@@ -86,5 +86,6 @@ class CustomerServiceSpec extends Specification{
         'j'||1
         ''||2
         'scala'||0
+        otherVar = 'hello'
     }
 }
