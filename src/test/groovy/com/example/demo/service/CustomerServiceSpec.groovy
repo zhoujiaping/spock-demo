@@ -3,6 +3,7 @@ package com.example.demo.service
 import com.example.demo.model.Customer
 import com.example.demo.repo.CustomerRepository
 import com.example.demo.repo.impl.CustomerRepositoryImpl
+import com.example.demo.service.impl.CustomerServiceImpl
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -17,7 +18,7 @@ import spock.lang.Specification
 @Slf4j
 class CustomerServiceSpec extends Specification{
     @Autowired
-    CustomerService customerService
+    CustomerServiceImpl customerService
     /**
      *
      * */
