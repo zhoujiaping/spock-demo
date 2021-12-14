@@ -1,6 +1,5 @@
 package com.example.demo.service.impl
 
-import com.example.demo.Fns
 import com.example.demo.model.Customer
 import com.example.demo.repo.CustomerRepository
 import com.example.demo.service.CustomerService
@@ -16,12 +15,10 @@ class CustomerServiceImpl implements CustomerService {
     @Override
     List<Customer> listCustomers(String searchKey) {
         log.info("invoke listCustomers...")
-        Fns.invoke(()->{
-            aMethod(searchKey)
-        })
+        aMethod(searchKey)
         customerRepository.listCustomers(searchKey)
     }
-    protected void aMethod(String key){
+    void aMethod(String key){
         log.info("amethod#$key")
     }
 

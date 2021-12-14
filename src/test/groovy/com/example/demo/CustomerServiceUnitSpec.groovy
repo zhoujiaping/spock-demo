@@ -5,21 +5,29 @@ import com.example.demo.repo.CustomerRepository
 import com.example.demo.service.impl.CustomerServiceImpl
 import spock.lang.Specification
 
-class CustomerServiceUnitSpec extends Specification{
-    def testSpy(){
+class CustomerServiceUnitSpec extends Specification {
+    CustomerServiceImpl customerService = Spy()
+    CustomerRepository customerRepository = Mock()
+    def setup(){
+        customerService.customerRepository = customerRepository
+    }
+    def testSpy() {
         given:
-        CustomerServiceImpl customerService = Spy{
-            aMethod(_) >> {
-                key->
-                    println "in spy $key"
-            }
-        }
-        customerService.customerRepository = Mock(CustomerRepository)
-        customerService.customerRepository.listCustomers(_)>>[new Customer(name:'jackson')]
+        customerService.customerRepository.listCustomers(_) >> [new Customer(name: 'jackson')]
         when:
         def customers = customerService.listCustomers("jack")
         then:
         customers.size() == 1
         customers[0].name == 'jackson'
+        /**
+         * 对于Mock、Stub、Spy的interaction verify，其mock方法要和该verify写在一起。！！！
+         * 对于Mock、Stub、Spy的interaction verify，其mock方法要和该verify写在一起。！！！
+         * 对于Mock、Stub、Spy的interaction verify，其mock方法要和该verify写在一起。！！！
+         * 这个在官网上找不到，stackoverflow上有高人说是这样的。
+         */
+        1 * customerService.aMethod(_) >> {
+            key ->
+                println "in spy $key"
+        }
     }
 }
