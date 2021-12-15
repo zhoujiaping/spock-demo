@@ -11,6 +11,12 @@ class CustomerServiceUnitSpec extends Specification {
     def setup(){
         customerService.customerRepository = customerRepository
     }
+    /**
+     * spock不支持mock静态方法。
+     * 有两种解决方案：
+     * 1 集成powermock
+     * 2 抽取到非static方法中
+     * */
     def testSpy() {
         given:
         customerService.customerRepository.listCustomers(_) >> [new Customer(name: 'jackson')]
